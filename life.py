@@ -81,17 +81,34 @@ print(text)
 
 print(re.match(r'(\[ \]|\[\*\])+$', "[ ][*][*][][ ]"))
 
+
+# проверка строк на валидность
 def check(a):
-    text_array = a.split('n') 
-    a = 0
-    while a not None:
-        a=re.match(r'(\[ \]|\[\*\])+$', text_array[i]) 
-        i=i+1
-    if a not None:
-         return True
-    else: return False
+    text_array = a.split('\n') 
+    for i in range(len(text_array)-2):
+        if not (len(text_array[i]) == len(text_array[i+1])): return False
+    for j in range(len(text_array)-1):
+        if not re.match(r'(\[ \]|\[\*\])+$', text_array[j]): return False
+    return True
+
+
+
+def check(a):
+    text_array = a.split('\n') 
+    for i in range(len(text_array)-2):
+        if not (len(text_array[i]) == len(text_array[i+1])): return False
+    return all(re.match(r'(\[ \]|\[\*\])+$', k) for k in text_array)
     
-check (
+            
+        
+a = """[ ][*][ ]
+[ ][ ][ ]
+[*][*][*]"""
+
+print(check(a))
+    
+
+#check (
     #for i in range(len(text_array))
     #    re.match(r'(\[ \]|\[\*\])+$', text_array[i])
         
@@ -102,8 +119,8 @@ check (
 #(\[ \]|\[\*\])
 
 
-for i in range(1,10): print(i)
+#for i in range(1,10): print(i)
 
-i=0
-while i<10:
-    print(i)
+#i=0
+#while i<10:
+#    print(i)
